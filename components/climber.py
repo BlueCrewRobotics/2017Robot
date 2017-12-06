@@ -1,3 +1,6 @@
+#climber.py
+#Robot Code For BlueCrew 6153
+
 import wpilib
 #Commands to make the robot climb.
 class Climber:
@@ -11,6 +14,7 @@ class Climber:
     def stop_climb(self):
         self.climb_motor.set(0)
     
-    #Execute is needed, but won't work with a given value.
+    #Execute is a necessary method for robotpy
+    #DO NO DELETE
     def execute(self):
         pass
