@@ -4,6 +4,7 @@
 
 import wpilib
 from wpilib.buttons import JoystickButton
+from robotpy_ext.common_drivers import navx
 from magicbot import MagicRobot
 
 from components.drivetrain import Drivetrain
@@ -35,6 +36,12 @@ class BluCubed(MagicRobot):
         self.drive_joystick = wpilib.Joystick(0)
         self.controller = XboxController(0)
 
+        #defines Smart Dashboard
+        self.sd = wpilib.SmartDashboard
+
+        #defines NavX
+        self.navx = navx.AHRS.create_spi()
+
     def teleopPeriodic(self):
         self.drivetrain.arcadeDrive()
 
@@ -43,6 +50,8 @@ class BluCubed(MagicRobot):
             self.shooter.shoot()
         else:
             self.shooter.stop()
+
+        self.sd.putBoolean('Yaw', self.navx.getYaw())
 
         #Stop and starts climb motor if y is pressed or released
         if self.controller.y():
